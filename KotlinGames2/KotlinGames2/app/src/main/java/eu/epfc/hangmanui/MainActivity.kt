@@ -3,11 +3,14 @@ package eu.epfc.hangmanui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var rectangleViews : MutableList<View>
+    private val gameManager= GameManager()
+
     private var tryCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         for (indicatorView in rectangleViews){
             indicatorView.alpha = 0.2f
         }
+        gameManager.startNewGame(this)
+        val maskedWordText : TextView =findViewById(R.id.maskedWord)
+        maskedWordText.text = gameManager.maskedWord
     }
 
     fun onClickOkButton(view: View) {
